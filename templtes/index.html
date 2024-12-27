@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitter Trending Topics</title>
+  </head>
+  <body>
+    <h1>Twitter Trending Topics</h1>
+    <button onclick="runScript()">Click to Get Trending Topics</button>
+    <div id="result"></div>
+    <script>
+      async function runScript() {
+        // Fetch data from the backend
+        const response = await fetch("/run-script");
+        const data = await response.json();
+
+        // Display the result on the page
+        document.getElementById("result").innerHTML = `
+                <h2>Top 5 Trending Topics</h2>
+                <ul>
+                    <li>${data.trend1}</li>
+                    <li>${data.trend2}</li>
+                    <li>${data.trend3}</li>
+                    <li>${data.trend4}</li>
+                    <li>${data.trend5}</li>
+                </ul>
+                <p>Scraped at: ${new Date(data.timestamp).toLocaleString()}</p>
+            `;
+      }
+    </script>
+  </body>
+</html>
